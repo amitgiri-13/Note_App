@@ -1,6 +1,6 @@
 import pytest 
 from project import NoteApp
-import os
+
 
 app = NoteApp()
 
@@ -25,5 +25,5 @@ def test_find_meaning():
         app.find_meaning("qwerty")
 
 def test_send_email():
-    assert app.send_email("prabinpyakurel82@gmail.com","Test Case","This is a test email","test_directory/test_file.txt") == "Sent"
+    assert app.send_email("example@gmail.com","Test Case","This is a test email","test_directory/test_file.txt") == "Sent"
     assert app.send_email("","","","") == "Could not send email"
