@@ -1,1 +1,5 @@
-cs50
+Database Management System
+Artificial Intelligence
+Theory of computation
+Operating System
+Computer networks

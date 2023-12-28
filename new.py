@@ -1,103 +1,97 @@
-#for gui
 from tkinter import *
-from tkinter import ttk,filedialog,colorchooser
-#os for file handeling
+from tkinter import ttk,filedialog
 import os
-#for dictonary
-import nltk
-#for email
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-#for sender email configuration
 import email_configure
+import nltk
+from tkinter import font,colorchooser
+
+
 
 class NoteApp:
     def __init__(self):
         self.subjects = []
         self.set_subject()
-    
-    #open a file from given directory
+
     def open_file(self,directory,filename):
         path = f"./{directory}/{filename}"
-        extension = filename.split(".")[-1]
-        if extension == "txt":
+        extension = filename.split('.')[-1]
+        if extension == 'txt':
             try:
                with open(path,mode="r",encoding="utf-8") as file:
                     text = file.read()
                     return text
 
             except FileNotFoundError:
-                return "File not found"
+                return 'File not found'
         
         else:
-            return "FileFormatNotSupported"
+            return "File Format Not Supported"
 
-    #save file to given directory
     def save_file(self,directory,filename,text_content):
         try:
-            path=f"./{directory}/{filename}"
-            with open(path,mode="a",encoding="utf-8") as file:
+            path=f'./{directory}/{filename}'
+            with open(path,mode='a',encoding='utf-8') as file:
                 file.write(text_content)
-                return "Saved successfully"
+                return 'Saved successfully'
 
         except:
-            os.makedirs(f"./{directory}")
+            os.makedirs(f'./{directory}')
             self.save_file(directory,filename,text_content)
-            return f"Created a new directory {directory}"
-   
-    #delete a file from given directory
+            return f'Created a new directory {directory}'
+    
     def delete_file(self,directory,filename):
         try:
-            file_path=f"./{directory}/{filename}"
-            if os.path.exists(f"./{directory}"):
+            file_path=f'./{directory}/{filename}'
+            if os.path.exists(f'./{directory}'):
                     if os.path.exists(file_path):
                         os.remove(file_path)
-                        return "Deleted file successfully"
+                        return 'Deleted file successfully'
                     else:
-                        return "File Not Found"
+                        return 'File Not Found'
             else:
                 return "Couldnot find that directory"
         except:
-            return "Deletion Unsuccessful"
+            return 'Deletion Unsuccessful'
     
-    #set subjects to organize notes accordingly
     def set_subject(self): 
-        subjects=self.open_file("subject","subject.txt")
+        subjects=self.open_file('subject','subject.txt')
         self.subjects = []
         for subject in subjects.split("\n"):
             if subject not in self.subjects:
                self.subjects.append(subject)
         self.subjects.pop()
-    
-    #find meaning of given word
+
     def find_meaning(self,word):
         meanings = nltk.corpus.wordnet.synsets(word)
+        #for meaning in meanings:
+           #print(f"Meaning: {meaning.definition()}")
         return (meanings[0].definition())
-    
-    #send email   
+        
     def send_email(self,receiver,subject,body,filepath):
         try:
             message = MIMEMultipart()
-            message["From"] = email_configure.email_id #fetching from configuration file
-            message["To"] = receiver
-            message["Subject"] = subject
-            message.attach(MIMEText(body,"plain"))
+            message['From'] = email_configure.email_id
+            message['To'] = receiver
+            message['Subject'] = subject
+            message.attach(MIMEText(body,'plain'))
 
-            with open(filepath,mode="rb") as attachment:
-                part= MIMEApplication(attachment.read(), Name=filepath.split("/")[-1])
+            with open(filepath,mode='rb') as attachment:
+                part= MIMEApplication(attachment.read(), Name=filepath.split('/')[-1])
                 
             message.attach(part)
 
-            with smtplib.SMTP("smtp.gmail.com",587) as server:
+
+            with smtplib.SMTP('smtp.gmail.com',587) as server:
                 server.starttls()
                 server.login(email_configure.email_id,email_configure.password)
                 server.send_message(message)
-
-            return "Sent"
+                return 'Sent'
         except:
-            return "Could not send email"
+            return "Couldnot send an email"
 
 class NoteAppGUI(NoteApp):
     def __init__(self,root):
