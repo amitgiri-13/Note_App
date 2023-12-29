@@ -1,4 +1,5 @@
 # Note_App
+#### Video Demo: https://youtu.be/_eRYiy14twg
 This is a simple and minimal note app designed  using Python Tkinter library for GUI.
 
 ## Table of Contents
