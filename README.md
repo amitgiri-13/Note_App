@@ -15,6 +15,10 @@ This is a simple and minimal note app designed  using Python Tkinter library for
 ## Overview
 This application is so designed to organize notes of different topics under respective subject. A user can create, save, open, edit, delete and even share note through in-built emailing system.
 
+![image](https://github.com/user-attachments/assets/0545cde6-6a5c-4f6d-a7f3-455ef50f6265)  ![image](https://github.com/user-attachments/assets/e5389c85-2e8a-4a44-812c-abcc4cb54b21)
+
+
+
 ## Features
 - Interactive GUI interface built with tkinter.
 - Add and Delete subjects 
