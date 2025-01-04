@@ -28,6 +28,7 @@ This application is so designed to organize notes of different topics under resp
 - Python 3.x
 - Tkinter (usually included in Python installations)
 - SMTPLIB 
+- nltk
 
 ## Installation
 1. Create a directory:

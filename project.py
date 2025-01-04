@@ -11,12 +11,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 #for sender email configuration
-import email_configure
+from dotenv import load_dotenv
 
 class NoteApp:
     def __init__(self):
         self.subjects = []
         self.set_subject()
+        load_dotenv()
     
     #open a file from given directory
     def open_file(self,directory,filename):
@@ -79,6 +80,8 @@ class NoteApp:
     #send email   
     def send_email(self,receiver,subject,body,filepath):
         try:
+            email = os.getenv("EMAIL_ID")
+            password = os.getenv("PASSWORD")
             message = MIMEMultipart()
             message["From"] = email_configure.email_id #fetching from configuration file
             message["To"] = receiver
@@ -92,7 +95,7 @@ class NoteApp:
 
             with smtplib.SMTP("smtp.gmail.com",587) as server:
                 server.starttls()
-                server.login(email_configure.email_id,email_configure.password)
+                server.login(email,password)
                 server.send_message(message)
 
             return "Sent"
