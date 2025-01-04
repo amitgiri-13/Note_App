@@ -57,10 +57,14 @@ This application is so designed to organize notes of different topics under resp
 3. Activate the virtual environment: `source env/bin/activate`.
 4. Install dependencies: `pip install -r requirements.txt`.
 5. Run the command `cd NOTE_APP`.
-6. Navigate to the email_configure.py and setup your email configuration.
-7. Run the command: `python project.py`.
-8. The gui window will appear. Take your notes.
-9. Stay organized.
+6. Configure your email:
+   - create .env file and add the following:
+   - "EMAIL_ID" = "your host email id"
+   - "PASSWORD" = "password of the email"
+   
+8. Run the command: `python project.py`.
+9. The gui window will appear. Take your notes.
+10. Stay organized.
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or pull requests for any improvements or bug fixes.
